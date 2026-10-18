@@ -1,0 +1,32 @@
+# Лабораторная работа №2. Работа на основе сокетных соединений
+
+Вариант 1.
+
+| Папка | Задание | Главный класс |
+|---|---|---|
+| `src/task1` | Общее 1: приложение из методички (поток-сервер `Account`, поток-клиент `clientThread`), клиент запускается щелчком мыши в окне | `task1.serv` |
+| `src/task2` | Общее 2: два клиента в отдельных потоках работают с одним счетом (оба запускаются щелчком мыши) | `task2.serv` |
+| `src/task3` | Общее 3: визуальный интерфейс — кнопка запускает клиента, состояние счета в текстовом поле | `task3.serv` |
+| `variant1/ServerProject` | Вариант 1: сервер, отдельный проект, без потоков | `ServerApp` |
+| `variant1/ClientProject` | Вариант 1: клиент, отдельный проект, без потоков | `ClientApp` |
+
+Все программы используют порт 3001, поэтому одновременно запускать можно только одну из них
+(для варианта 1 — сервер и клиент вместе).
+
+## Запуск из терминала
+
+```sh
+# общие задания (N = 1, 2, 3)
+javac -d out src/task*/serv.java
+java -cp out taskN.serv
+
+# вариант 1: сначала сервер, затем клиент (в другом терминале, можно несколько раз)
+javac -d variant1/ServerProject/out variant1/ServerProject/src/ServerApp.java
+java -cp variant1/ServerProject/out ServerApp
+
+javac -d variant1/ClientProject/out variant1/ClientProject/src/ClientApp.java
+java -cp variant1/ClientProject/out ClientApp
+```
+
+В IntelliJ IDEA для варианта 1 папки `variant1/ServerProject` и `variant1/ClientProject`
+открываются как два отдельных проекта.
