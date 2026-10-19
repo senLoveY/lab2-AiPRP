@@ -51,7 +51,6 @@ public class BankServer extends Frame {
         log.append(msg + "\n");
     }
 
-    // Выводит IPv4-адреса компьютера, чтобы сообщить их клиентам
     void printAddresses()
     {
         print("Адреса этого компьютера (введите один из них в клиенте):");
@@ -69,7 +68,6 @@ public class BankServer extends Frame {
         print("    127.0.0.1   (этот же компьютер)");
     }
 
-    // Выполняет команду клиента и возвращает строку ответа
     String execute(String request)
     {
         if (request == null)
@@ -92,7 +90,6 @@ public class BankServer extends Frame {
                 return "OK " + amount;
             }
         } catch (Exception e) {
-            // неверный формат команды
         }
         return "ERROR " + amount;
     }
@@ -108,16 +105,16 @@ public class BankServer extends Frame {
             ServerSocket server = new ServerSocket(PORT);
             f.print("Сервер запущен на порту " + PORT + ". Начальный баланс: " + amount + " руб.");
 
-            while (true) { // Клиенты обслуживаются по очереди в главном потоке
+            while (true) {
                 Socket s = null;
                 try {
                     s = server.accept();
                     BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream(), "UTF-8"));
                     PrintStream ps = new PrintStream(s.getOutputStream(), true, "UTF-8");
 
-                    String request = in.readLine();       // команда от клиента
+                    String request = in.readLine();
                     String response = f.execute(request);
-                    ps.println(response);                 // ответ клиенту
+                    ps.println(response);
                     ps.flush();
 
                     f.print(s.getInetAddress().getHostAddress() + ": " + request + " -> " + response);

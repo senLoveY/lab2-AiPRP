@@ -44,6 +44,16 @@ javac -d bank/BankClient/out bank/BankClient/src/BankClient.java
 java -cp bank/BankClient/out BankClient
 ```
 
+### Apache NetBeans
+
+`bank/BankServer` и `bank/BankClient` — Maven-проекты, NetBeans открывает их без настройки:
+**File → Open Project…** → выбрать папку `bank/BankClient` (или `bank/BankServer`, у нее значок проекта) →
+**Run Project** (`F6`). При первом запуске NetBeans скачает плагины Maven, нужен интернет.
+
+Клиент есть также в виде обычного проекта NetBeans (Java with Ant), без Maven и без интернета:
+**File → Open Project…** → `bank/BankClientNetBeans` → **Run Project** (`F6`). Исходник он берет
+из `bank/BankClient/src`, то есть код у обоих проектов общий.
+
 Протокол — одна строка-команда на соединение: `BALANCE`, `DEPOSIT <сумма>`, `WITHDRAW <сумма>`;
 ответ — `OK <баланс>`, `NOMONEY <баланс>` (недостаточно средств) или `ERROR <баланс>`.
 

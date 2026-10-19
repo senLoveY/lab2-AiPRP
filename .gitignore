@@ -22,6 +22,8 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
+bank/BankClientNetBeans/nbproject/private/
+bank/BankClientNetBeans/dist/
 
 ### VS Code ###
 .vscode/
