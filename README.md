@@ -9,6 +9,8 @@
 | `src/task3` | Общее 3: визуальный интерфейс — кнопка запускает клиента, состояние счета в текстовом поле | `task3.serv` |
 | `variant1/ServerProject` | Вариант 1: сервер, отдельный проект, без потоков | `ServerApp` |
 | `variant1/ClientProject` | Вариант 1: клиент, отдельный проект, без потоков | `ClientApp` |
+| `bank/BankServer` | Банк: сервер с окном, хранит общий счет | `BankServer` |
+| `bank/BankClient` | Банк: клиент с окном — ввод IP сервера, «Положить», «Снять», «Обновить» | `BankClient` |
 
 Все программы используют порт 3001, поэтому одновременно запускать можно только одну из них
 (для варианта 1 — сервер и клиент вместе).
@@ -27,6 +29,23 @@ java -cp variant1/ServerProject/out ServerApp
 javac -d variant1/ClientProject/out variant1/ClientProject/src/ClientApp.java
 java -cp variant1/ClientProject/out ClientApp
 ```
+
+## Банк на нескольких компьютерах
+
+Сервер запускается на одном компьютере и показывает в окне свои IP-адреса. Каждый клиент
+при запуске вводит один из этих адресов и нажимает «Подключиться», после чего может класть
+деньги на общий счет и снимать их (снять больше, чем есть на счете, нельзя).
+
+```sh
+javac -d bank/BankServer/out bank/BankServer/src/BankServer.java
+java -cp bank/BankServer/out BankServer
+
+javac -d bank/BankClient/out bank/BankClient/src/BankClient.java
+java -cp bank/BankClient/out BankClient
+```
+
+Протокол — одна строка-команда на соединение: `BALANCE`, `DEPOSIT <сумма>`, `WITHDRAW <сумма>`;
+ответ — `OK <баланс>`, `NOMONEY <баланс>` (недостаточно средств) или `ERROR <баланс>`.
 
 В IntelliJ IDEA для варианта 1 папки `variant1/ServerProject` и `variant1/ClientProject`
 открываются как два отдельных проекта.
